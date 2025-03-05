@@ -1,0 +1,87 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Product API",
+      "description": "API for managing products"
+    },
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "schemes": ["http"],
+    "paths": {
+      "/product": {
+        "post": {
+          "summary": "Create a new product",
+          "consumes": ["multipart/form-data"],
+          "parameters": [
+            { "name": "productName", "in": "formData", "required": true, "type": "string" },
+            { "name": "category", "in": "formData", "required": true, "type": "string" },
+            { "name": "productShortDescription", "in": "formData", "type": "string" },
+            { "name": "productDescription", "in": "formData", "type": "string" },
+            { "name": "productPrice", "in": "formData", "type": "number" },
+            { "name": "productSalePrice", "in": "formData", "type": "number" },
+            { "name": "productSKU", "in": "formData", "type": "string" },
+            { "name": "productType", "in": "formData", "type": "string" },
+            { "name": "stockStatus", "in": "formData", "type": "string" },
+            { "name": "productImage", "in": "formData", "type": "file" }
+          ],
+          "responses": {
+            "200": { "description": "Product created successfully" },
+            "400": { "description": "Invalid input" }
+          }
+        },
+        "get": {
+          "summary": "Retrieve all products",
+          "parameters": [
+            { "name": "productName", "in": "query", "type": "string" },
+            { "name": "categoryId", "in": "query", "type": "string" },
+            { "name": "pageSize", "in": "query", "type": "integer" },
+            { "name": "page", "in": "query", "type": "integer" }
+          ],
+          "responses": {
+            "200": { "description": "Success" },
+            "400": { "description": "Invalid request" }
+          }
+        }
+      },
+      "/product/{id}": {
+        "get": {
+          "summary": "Retrieve a product by ID",
+          "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+          "responses": {
+            "200": { "description": "Product found" },
+            "404": { "description": "Product not found" }
+          }
+        },
+        "put": {
+          "summary": "Update a product",
+          "parameters": [
+            { "name": "id", "in": "path", "required": true, "type": "string" },
+            { "name": "productName", "in": "formData", "type": "string" },
+            { "name": "category", "in": "formData", "type": "string" },
+            { "name": "productShortDescription", "in": "formData", "type": "string" },
+            { "name": "productDescription", "in": "formData", "type": "string" },
+            { "name": "productPrice", "in": "formData", "type": "number" },
+            { "name": "productSalePrice", "in": "formData", "type": "number" },
+            { "name": "productSKU", "in": "formData", "type": "string" },
+            { "name": "productType", "in": "formData", "type": "string" },
+            { "name": "stockStatus", "in": "formData", "type": "string" },
+            { "name": "productImage", "in": "formData", "type": "file" }
+          ],
+          "responses": {
+            "200": { "description": "Product updated successfully" },
+            "400": { "description": "Invalid request" }
+          }
+        },
+        "delete": {
+          "summary": "Delete a product",
+          "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+          "responses": {
+            "200": { "description": "Product deleted successfully" },
+            "404": { "description": "Product not found" }
+          }
+        }
+      }
+    }
+  }
+  
