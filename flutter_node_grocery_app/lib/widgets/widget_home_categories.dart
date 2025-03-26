@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_node_grocery_app/models/category.dart';
 import 'package:flutter_node_grocery_app/models/pagination.dart';
-import 'package:flutter_node_grocery_app/providers/category_provider.dart';
+import 'package:flutter_node_grocery_app/models/product_filter.dart';
+import 'package:flutter_node_grocery_app/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeCategoriesWidget extends ConsumerWidget {
@@ -64,7 +65,7 @@ class HomeCategoriesWidget extends ConsumerWidget {
           return const Center(child: Text("No categories available"));
         }
         debugPrint("Fetched categories: ${list.length}");
-        return _buildCategoryList(list);
+        return _buildCategoryList(list, ref);
       },
       error: (err, stack) {
         debugPrint("Provider Error: $err");
@@ -77,9 +78,9 @@ class HomeCategoriesWidget extends ConsumerWidget {
     );
   }
 
-  Widget _buildCategoryList(List<Category> categories) {
+  Widget _buildCategoryList(List<Category> categories, WidgetRef ref) {
     return Container(
-      height: 100,
+      height: 150,
       alignment: Alignment.centerLeft,
       child: ListView.builder(
         shrinkWrap: true,
@@ -91,7 +92,23 @@ class HomeCategoriesWidget extends ConsumerWidget {
           debugPrint("${data.categoryName}");
           debugPrint("${data.fullImagePath}");
           return GestureDetector(
-            onTap: () {},
+            onTap: () {
+              ProductFilterModel filterModel = ProductFilterModel(
+                paginationModel: PaginationModel(page: 1, pageSize: 10),
+                categoryId: data.categoryId,
+              );
+              ref
+                  .read(productsFilterProvider.notifier)
+                  .setProductFilter(filterModel);
+              ref.read(productsNotifierProvider.notifier).getProducts();
+              Navigator.of(context).pushNamed(
+                '/products',
+                arguments: {
+                  'categoryId': data.categoryId,
+                  'categoryName': data.categoryName,
+                },
+              );
+            },
             child: Padding(
               padding: EdgeInsets.all(8),
               child: Column(

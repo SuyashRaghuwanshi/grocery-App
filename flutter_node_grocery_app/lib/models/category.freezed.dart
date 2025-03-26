@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Category {
 
- String get categoryName; String get categoryImage; String get categoryId;
+ String get categoryId; String get categoryName; String get categoryImage;
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $CategoryCopyWith<Category> get copyWith => _$CategoryCopyWithImpl<Category>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Category&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.categoryImage, categoryImage) || other.categoryImage == categoryImage)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Category&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.categoryImage, categoryImage) || other.categoryImage == categoryImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,categoryName,categoryImage,categoryId);
+int get hashCode => Object.hash(runtimeType,categoryId,categoryName,categoryImage);
 
 @override
 String toString() {
-  return 'Category(categoryName: $categoryName, categoryImage: $categoryImage, categoryId: $categoryId)';
+  return 'Category(categoryId: $categoryId, categoryName: $categoryName, categoryImage: $categoryImage)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $CategoryCopyWith<$Res>  {
   factory $CategoryCopyWith(Category value, $Res Function(Category) _then) = _$CategoryCopyWithImpl;
 @useResult
 $Res call({
- String categoryName, String categoryImage, String categoryId
+ String categoryId, String categoryName, String categoryImage
 });
 
 
@@ -66,11 +66,11 @@ class _$CategoryCopyWithImpl<$Res>
 
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? categoryName = null,Object? categoryImage = null,Object? categoryId = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? categoryId = null,Object? categoryName = null,Object? categoryImage = null,}) {
   return _then(_self.copyWith(
-categoryName: null == categoryName ? _self.categoryName : categoryName // ignore: cast_nullable_to_non_nullable
+categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as String,categoryName: null == categoryName ? _self.categoryName : categoryName // ignore: cast_nullable_to_non_nullable
 as String,categoryImage: null == categoryImage ? _self.categoryImage : categoryImage // ignore: cast_nullable_to_non_nullable
-as String,categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -81,13 +81,13 @@ as String,
 /// @nodoc
 @JsonSerializable()
 
-class _Category implements Category {
-  _Category({required this.categoryName, required this.categoryImage, required this.categoryId});
+class _Category extends Category {
+   _Category({required this.categoryId, required this.categoryName, required this.categoryImage}): super._();
   factory _Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
 
+@override final  String categoryId;
 @override final  String categoryName;
 @override final  String categoryImage;
-@override final  String categoryId;
 
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
@@ -102,16 +102,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Category&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.categoryImage, categoryImage) || other.categoryImage == categoryImage)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Category&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.categoryImage, categoryImage) || other.categoryImage == categoryImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,categoryName,categoryImage,categoryId);
+int get hashCode => Object.hash(runtimeType,categoryId,categoryName,categoryImage);
 
 @override
 String toString() {
-  return 'Category(categoryName: $categoryName, categoryImage: $categoryImage, categoryId: $categoryId)';
+  return 'Category(categoryId: $categoryId, categoryName: $categoryName, categoryImage: $categoryImage)';
 }
 
 
@@ -122,7 +122,7 @@ abstract mixin class _$CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res>
   factory _$CategoryCopyWith(_Category value, $Res Function(_Category) _then) = __$CategoryCopyWithImpl;
 @override @useResult
 $Res call({
- String categoryName, String categoryImage, String categoryId
+ String categoryId, String categoryName, String categoryImage
 });
 
 
@@ -139,11 +139,11 @@ class __$CategoryCopyWithImpl<$Res>
 
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? categoryName = null,Object? categoryImage = null,Object? categoryId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? categoryId = null,Object? categoryName = null,Object? categoryImage = null,}) {
   return _then(_Category(
-categoryName: null == categoryName ? _self.categoryName : categoryName // ignore: cast_nullable_to_non_nullable
+categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as String,categoryName: null == categoryName ? _self.categoryName : categoryName // ignore: cast_nullable_to_non_nullable
 as String,categoryImage: null == categoryImage ? _self.categoryImage : categoryImage // ignore: cast_nullable_to_non_nullable
-as String,categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

@@ -5,5 +5,9 @@ class Config {
   static const String imageURL =
       "$apiUrl/"; //put api url from above in this afte http://
   static const String categoryAPI = "api/category";
+  static const String productAPI = "api/product";
+  static const String registerAPI = "api/register";
+  static const String loginAPI = "api/register";
   static const int pageSize = 10;
+  static const String currency = "";
 }

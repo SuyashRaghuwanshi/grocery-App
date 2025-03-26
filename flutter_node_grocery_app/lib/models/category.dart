@@ -41,35 +41,20 @@ List<Category> categoriesFromJson(List<dynamic> jsonList) {
 }
 
 @freezed
-class Category with _$Category {
+abstract class Category with _$Category {
   factory Category({
     required String categoryId,
     required String categoryName,
     required String categoryImage,
   }) = _Category;
 
+  // ✅ Add a private constructor (Fix for Freezed error)
+  const Category._();
+
+  // ✅ JSON Serialization
   factory Category.fromJson(Map<String, dynamic> json) =>
       _$CategoryFromJson(json);
 
-  @override
-  // TODO: implement categoryId
-  String get categoryId => throw UnimplementedError();
-
-  @override
-  // TODO: implement categoryImage
-  String get categoryImage => throw UnimplementedError();
-
-  @override
-  // TODO: implement categoryName
-  String get categoryName => throw UnimplementedError();
-
-  @override
-  Map<String, dynamic> toJson() {
-    // TODO: implement toJson
-    throw UnimplementedError();
-  }
-}
-
-extension CategoryExt on Category {
+  // ✅ Custom getter inside private constructor (Fixes Getter Error)
   String get fullImagePath => "${Config.imageURL}$categoryImage";
 }
