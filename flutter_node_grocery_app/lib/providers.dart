@@ -6,6 +6,7 @@ import 'package:flutter_node_grocery_app/models/category.dart';
 import 'package:flutter_node_grocery_app/models/pagination.dart';
 import 'package:flutter_node_grocery_app/models/product.dart';
 import 'package:flutter_node_grocery_app/models/product_filter.dart';
+import 'package:flutter_node_grocery_app/models/slider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final categoryProvider =
@@ -41,3 +42,11 @@ final productsNotifierProvider =
         ref.watch(productsFilterProvider),
       ),
     );
+
+final sliderProvider = FutureProvider.family<
+  List<SliderModel>?,
+  PaginationModel
+>((ref, paginationModel) {
+  final sliderRepo = ref.watch(apiService);
+  return sliderRepo.getSliders(paginationModel.page, paginationModel.pageSize);
+});

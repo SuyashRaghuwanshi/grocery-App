@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_node_grocery_app/widgets/widget_home_categories.dart';
 import 'package:flutter_node_grocery_app/widgets/widget_home_productss.dart';
+import 'package:flutter_node_grocery_app/widgets/widget_home_slider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,7 +11,11 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: ListView(
-          children: [HomeCategoriesWidget(), const HomeProductsWidget()],
+          children: [
+            HomeSliderWidget(),
+            HomeCategoriesWidget(),
+            const HomeProductsWidget(),
+          ],
         ),
       ),
     );

@@ -11,9 +11,10 @@ const cors = require("cors");
 
 // ✅ Enable CORS properly
 app.use(cors({
-    origin: "*", // Allow all origins
+    origin: "http://localhost:54008", // Allow all origins
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
+
 }));
 
 // ✅ Connect to MongoDB
@@ -32,7 +33,7 @@ console.log("✅ API routes are registered. Test at http://localhost:5000/api/pr
 
 app.use(errors.errorHandler);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use("/api-prod",swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+// app.use("/api-prod",swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 // ✅ Start Server
 const PORT = process.env.PORT || 5000;

@@ -22,7 +22,6 @@ exports.create=(req,res,next)=>{
                 stockStatus:req.body.stockStatus,
                 productImage:path !=""? "/"+path : ""
             }
-
             console.log("✅ Product Model:", model);
 
             productServices.createProduct(model,(error, results)=>{
@@ -48,7 +47,8 @@ exports.findAll=(req, res, next)=>{
         productName:req.query.productName,
         categoryId:req.query.categoryId,
         pageSize: req.query.pageSize,
-        page:req.query.page
+        page:req.query.page,
+        sort: req.query.sort,
     };
     productServices.getProducts(model,(error, results)=>{
         if(error){

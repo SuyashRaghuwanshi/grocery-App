@@ -9,29 +9,75 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "servers": "localhost:5000",
+  "host": "localhost:5000",
   "basePath": "/",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "tags": [
     {
       "name": "Category",
       "description": "Category API"
+    },
+    {
+      "name": "Users",
+      "description": "Users API"
     }
   ],
-  "schemes": [
-    "http"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "paths": {
+    "/api/register": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Register API",
+        "parameters": [
+          {
+            "name": "RegisterModel",
+            "in": "body",
+            "description": "User Registration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Login API",
+        "parameters": [
+          {
+            "name": "LoginModel",
+            "in": "body",
+            "description": "User Login API",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceResponse"
+            }
+          }
+        }
+      }
+    },
     "/api/category": {
       "get": {
-        "tags": [
-          "Category"
-        ],
+        "tags": ["Category"],
         "summary": "Get all Categories",
         "parameters": [
           {
@@ -68,13 +114,9 @@
         }
       },
       "post": {
-        "tags": [
-          "Category"
-        ],
+        "tags": ["Category"],
         "summary": "Create Category API",
-        "consumes": [
-          "multipart/form-data"
-        ],
+        "consumes": ["multipart/form-data"],
         "parameters": [
           {
             "name": "categoryName",
@@ -117,9 +159,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Category"
-        ],
+        "tags": ["Category"],
         "summary": "Category Details based on Category Id",
         "responses": {
           "200": {
@@ -131,13 +171,9 @@
         }
       },
       "put": {
-        "tags": [
-          "Category"
-        ],
+        "tags": ["Category"],
         "summary": "Update Category API",
-        "consumes": [
-          "multipart/form-data"
-        ],
+        "consumes": ["multipart/form-data"],
         "parameters": [
           {
             "name": "categoryName",
@@ -170,9 +206,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Category"
-        ],
+        "tags": ["Category"],
         "summary": "Delete Category API",
         "responses": {
           "200": {
@@ -187,19 +221,15 @@
   },
   "definitions": {
     "Category": {
-      "required": [
-        "categoryName",
-        "_id"
-      ],
+      "required": ["categoryName", "_id"],
       "properties": {
         "_id": {
-          "type": "integer",
-          "uniqueItems": true
+          "type": "string"
         },
         "categoryName": {
           "type": "string"
         },
-        "productDescription": {
+        "categoryDescription": {
           "type": "string"
         },
         "categoryImage": {
@@ -217,6 +247,31 @@
           "items": {
             "$ref": "#/definitions/Category"
           }
+        }
+      }
+    },
+    "RegisterModel": {
+      "required": ["fullName", "email", "password"],
+      "properties": {
+        "fullName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginModel": {
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
         }
       }
     }

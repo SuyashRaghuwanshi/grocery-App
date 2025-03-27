@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_node_grocery_app/pages/dashboard_page.dart';
 import 'package:flutter_node_grocery_app/pages/home_page.dart';
 import 'package:flutter_node_grocery_app/pages/login_page.dart';
 import 'package:flutter_node_grocery_app/pages/products_page.dart';
@@ -11,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   bool _result = await SharedService.isLogged();
   if (_result) {
-    _defaultHome = const HomePage();
+    _defaultHome = const DashBoardPage();
   }
   runApp(const ProviderScope(child: MyApp()));
 }

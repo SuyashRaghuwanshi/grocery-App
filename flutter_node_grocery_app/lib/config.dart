@@ -7,7 +7,8 @@ class Config {
   static const String categoryAPI = "api/category";
   static const String productAPI = "api/product";
   static const String registerAPI = "api/register";
-  static const String loginAPI = "api/register";
+  static const String loginAPI = "api/login";
+  static const String sliderAPI = "api/slider";
   static const int pageSize = 10;
   static const String currency = "";
 }

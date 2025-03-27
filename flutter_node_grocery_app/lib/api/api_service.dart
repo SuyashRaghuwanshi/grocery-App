@@ -6,6 +6,7 @@ import "package:flutter_node_grocery_app/models/category.dart";
 import 'package:flutter_node_grocery_app/models/login_response_model.dart';
 import 'package:flutter_node_grocery_app/models/product.dart';
 import 'package:flutter_node_grocery_app/models/product_filter.dart';
+import 'package:flutter_node_grocery_app/models/slider.dart';
 import 'package:flutter_node_grocery_app/utils/shared_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -126,6 +127,29 @@ class APIService {
       return true;
     } else {
       return false;
+    }
+  }
+
+  Future<List<SliderModel>?> getSliders(page, pageSize) async {
+    Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
+    Map<String, String> queryString = {
+      'page': page.toString(),
+      'pageSize': pageSize.toString(),
+    };
+    var url = Uri.http(Config.apiUrl, Config.sliderAPI, queryString);
+
+    var response = await client.get(url, headers: requestHeaders);
+    if (response.statusCode == 200) {
+      try {
+        var data = jsonDecode(response.body);
+        return slidersFromJson(data);
+      } catch (e) {
+        debugPrint("Error decoding JSON: $e");
+        return null;
+      }
+    } else {
+      debugPrint("Failed to fetch sliders");
+      return null;
     }
   }
 }

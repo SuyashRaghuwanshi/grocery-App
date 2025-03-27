@@ -5,11 +5,11 @@
       "title": "Product API",
       "description": "API for managing products"
     },
-    "host": "localhost:3000",
-    "basePath": "/api",
+    "host": "localhost:5000",
+    "basePath": "/",
     "schemes": ["http"],
     "paths": {
-      "/product": {
+      "/api/product": {
         "post": {
           "summary": "Create a new product",
           "consumes": ["multipart/form-data"],
