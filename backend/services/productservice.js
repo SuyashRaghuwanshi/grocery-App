@@ -44,6 +44,12 @@ async function getProducts(params, callback){
         condition["category"]= categoryId;
     }
 
+    if(params.productIds){
+        condition["_id"]={
+            $in: params.productIds.split(",")
+        };
+    }
+
     let perPage=Math.abs(params.pageSize)|| MONGO_DB_CONFIG.PAGE_SIZE;
     let page=(Math.abs(params.page)|| 1)-1;
 
@@ -51,10 +57,18 @@ async function getProducts(params, callback){
     .find(condition, "productShortDescription productPrice productSalePrice productImage productSKU productType stockStatus createdAt updatedAt")
     .sort(params.sort)
     .populate("category", "categoryName categoryImage")
+    .populate("relatedProducts","relatedProduct")
     .limit(perPage)
     .skip(perPage * page)
     .then((response)=>{
-        return callback(null, response);
+
+        var res=response.map(r=>{
+            if(r.relatedProducts.length>0){
+                r.relatedProducts=r.relatedProducts.map(x=>x.relatedProducts);
+            }
+            return r;
+        })
+        return callback(null, res);
     })
     .catch((error)=>{
         console.log("suy");
@@ -68,7 +82,9 @@ async function getProductById(params, callback){
     product
     .findById(productId)
     .populate("category", "categoryName categoryImage")
+    .populate("relatedProducts","relatedProduct")
     .then((response)=>{
+        response.relatedProducts=response.relatedProducts.map(x=>{return x.relatedProducts});
         return callback(null, response);
     })
     .catch((error)=>{

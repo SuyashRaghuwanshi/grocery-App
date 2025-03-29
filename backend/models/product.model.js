@@ -1,4 +1,5 @@
 const mongoose=require("mongoose");
+const { RelatedProduct } = require("./related_products.model");
 const product=new mongoose.Schema(
     {
         productName:{
@@ -42,7 +43,12 @@ const product=new mongoose.Schema(
         stockStatus:{
             type:String,
             default:"IN"
-        }
+        },
+        relatedProducts: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Product"
+        }]
+        
     },{
         toJSON: {
             transform:function(doc,ret){

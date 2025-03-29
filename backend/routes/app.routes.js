@@ -2,6 +2,7 @@ const categoryController= require("../controllers/categories.controller.js");
 const productController= require("../controllers/products.controller.js");
 const userController= require("../controllers/users.controller.js");
 const sliderController= require("../controllers/slider.controller.js");
+const relatedProductController= require("../controllers/related_product.controller.js");
 const express =require("express");
 const router=express.Router();
 
@@ -32,6 +33,10 @@ console.log(userController); // Debugging line
 
 router.post("/register", userController.register);
 router.post("/login", userController.login);
+
+router.post("/relatedProduct", relatedProductController.create);
+router.delete("/relatedProduct/:id", relatedProductController.delete);
+
 
 console.log("✅ Product route registered");
 module.exports= router;
