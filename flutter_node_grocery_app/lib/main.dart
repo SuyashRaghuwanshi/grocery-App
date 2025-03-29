@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_node_grocery_app/pages/dashboard_page.dart';
 import 'package:flutter_node_grocery_app/pages/home_page.dart';
 import 'package:flutter_node_grocery_app/pages/login_page.dart';
+import 'package:flutter_node_grocery_app/pages/product_details.page.dart';
 import 'package:flutter_node_grocery_app/pages/products_page.dart';
 import 'package:flutter_node_grocery_app/pages/register_page.dart';
 import 'package:flutter_node_grocery_app/utils/shared_service.dart';
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
         '/home': (BuildContext context) => HomePage(),
         '/login': (BuildContext context) => LoginPage(),
         '/products': (BuildContext context) => ProductsPage(),
+        '/product-details':
+            (BuildContext context) => const ProductDetailsPage(),
       },
     );
   }

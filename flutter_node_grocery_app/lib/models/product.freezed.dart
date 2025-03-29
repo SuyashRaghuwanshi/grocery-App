@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Product {
 
- String get productName; Category get category; String get productShortDescription; double get productPrice; double get productSalePrice; String get productImage; String get productSKU; String get productType; String get stockStatus; String get productId;
+ String get productName; Category get category; String get productShortDescription; double get productPrice; double get productSalePrice; String get productImage; String get productSKU; String get productType; String get stockStatus; String get productId; List<String>? get relatedProducts;
 /// Create a copy of Product
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $ProductCopyWith<Product> get copyWith => _$ProductCopyWithImpl<Product>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Product&&(identical(other.productName, productName) || other.productName == productName)&&(identical(other.category, category) || other.category == category)&&(identical(other.productShortDescription, productShortDescription) || other.productShortDescription == productShortDescription)&&(identical(other.productPrice, productPrice) || other.productPrice == productPrice)&&(identical(other.productSalePrice, productSalePrice) || other.productSalePrice == productSalePrice)&&(identical(other.productImage, productImage) || other.productImage == productImage)&&(identical(other.productSKU, productSKU) || other.productSKU == productSKU)&&(identical(other.productType, productType) || other.productType == productType)&&(identical(other.stockStatus, stockStatus) || other.stockStatus == stockStatus)&&(identical(other.productId, productId) || other.productId == productId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Product&&(identical(other.productName, productName) || other.productName == productName)&&(identical(other.category, category) || other.category == category)&&(identical(other.productShortDescription, productShortDescription) || other.productShortDescription == productShortDescription)&&(identical(other.productPrice, productPrice) || other.productPrice == productPrice)&&(identical(other.productSalePrice, productSalePrice) || other.productSalePrice == productSalePrice)&&(identical(other.productImage, productImage) || other.productImage == productImage)&&(identical(other.productSKU, productSKU) || other.productSKU == productSKU)&&(identical(other.productType, productType) || other.productType == productType)&&(identical(other.stockStatus, stockStatus) || other.stockStatus == stockStatus)&&(identical(other.productId, productId) || other.productId == productId)&&const DeepCollectionEquality().equals(other.relatedProducts, relatedProducts));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,productName,category,productShortDescription,productPrice,productSalePrice,productImage,productSKU,productType,stockStatus,productId);
+int get hashCode => Object.hash(runtimeType,productName,category,productShortDescription,productPrice,productSalePrice,productImage,productSKU,productType,stockStatus,productId,const DeepCollectionEquality().hash(relatedProducts));
 
 @override
 String toString() {
-  return 'Product(productName: $productName, category: $category, productShortDescription: $productShortDescription, productPrice: $productPrice, productSalePrice: $productSalePrice, productImage: $productImage, productSKU: $productSKU, productType: $productType, stockStatus: $stockStatus, productId: $productId)';
+  return 'Product(productName: $productName, category: $category, productShortDescription: $productShortDescription, productPrice: $productPrice, productSalePrice: $productSalePrice, productImage: $productImage, productSKU: $productSKU, productType: $productType, stockStatus: $stockStatus, productId: $productId, relatedProducts: $relatedProducts)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $ProductCopyWith<$Res>  {
   factory $ProductCopyWith(Product value, $Res Function(Product) _then) = _$ProductCopyWithImpl;
 @useResult
 $Res call({
- String productName, Category category, String productShortDescription, double productPrice, double productSalePrice, String productImage, String productSKU, String productType, String stockStatus, String productId
+ String productName, Category category, String productShortDescription, double productPrice, double productSalePrice, String productImage, String productSKU, String productType, String stockStatus, String productId, List<String>? relatedProducts
 });
 
 
@@ -66,7 +66,7 @@ class _$ProductCopyWithImpl<$Res>
 
 /// Create a copy of Product
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? productName = null,Object? category = null,Object? productShortDescription = null,Object? productPrice = null,Object? productSalePrice = null,Object? productImage = null,Object? productSKU = null,Object? productType = null,Object? stockStatus = null,Object? productId = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? productName = null,Object? category = null,Object? productShortDescription = null,Object? productPrice = null,Object? productSalePrice = null,Object? productImage = null,Object? productSKU = null,Object? productType = null,Object? stockStatus = null,Object? productId = null,Object? relatedProducts = freezed,}) {
   return _then(_self.copyWith(
 productName: null == productName ? _self.productName : productName // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
@@ -78,7 +78,8 @@ as String,productSKU: null == productSKU ? _self.productSKU : productSKU // igno
 as String,productType: null == productType ? _self.productType : productType // ignore: cast_nullable_to_non_nullable
 as String,stockStatus: null == stockStatus ? _self.stockStatus : stockStatus // ignore: cast_nullable_to_non_nullable
 as String,productId: null == productId ? _self.productId : productId // ignore: cast_nullable_to_non_nullable
-as String,
+as String,relatedProducts: freezed == relatedProducts ? _self.relatedProducts : relatedProducts // ignore: cast_nullable_to_non_nullable
+as List<String>?,
   ));
 }
 /// Create a copy of Product
@@ -98,7 +99,7 @@ $CategoryCopyWith<$Res> get category {
 @JsonSerializable()
 
 class _Product implements Product {
-   _Product({required this.productName, required this.category, required this.productShortDescription, required this.productPrice, required this.productSalePrice, required this.productImage, required this.productSKU, required this.productType, required this.stockStatus, required this.productId});
+   _Product({required this.productName, required this.category, required this.productShortDescription, required this.productPrice, required this.productSalePrice, required this.productImage, required this.productSKU, required this.productType, required this.stockStatus, required this.productId, final  List<String>? relatedProducts}): _relatedProducts = relatedProducts;
   factory _Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 
 @override final  String productName;
@@ -111,6 +112,15 @@ class _Product implements Product {
 @override final  String productType;
 @override final  String stockStatus;
 @override final  String productId;
+ final  List<String>? _relatedProducts;
+@override List<String>? get relatedProducts {
+  final value = _relatedProducts;
+  if (value == null) return null;
+  if (_relatedProducts is EqualUnmodifiableListView) return _relatedProducts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
 
 /// Create a copy of Product
 /// with the given fields replaced by the non-null parameter values.
@@ -125,16 +135,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Product&&(identical(other.productName, productName) || other.productName == productName)&&(identical(other.category, category) || other.category == category)&&(identical(other.productShortDescription, productShortDescription) || other.productShortDescription == productShortDescription)&&(identical(other.productPrice, productPrice) || other.productPrice == productPrice)&&(identical(other.productSalePrice, productSalePrice) || other.productSalePrice == productSalePrice)&&(identical(other.productImage, productImage) || other.productImage == productImage)&&(identical(other.productSKU, productSKU) || other.productSKU == productSKU)&&(identical(other.productType, productType) || other.productType == productType)&&(identical(other.stockStatus, stockStatus) || other.stockStatus == stockStatus)&&(identical(other.productId, productId) || other.productId == productId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Product&&(identical(other.productName, productName) || other.productName == productName)&&(identical(other.category, category) || other.category == category)&&(identical(other.productShortDescription, productShortDescription) || other.productShortDescription == productShortDescription)&&(identical(other.productPrice, productPrice) || other.productPrice == productPrice)&&(identical(other.productSalePrice, productSalePrice) || other.productSalePrice == productSalePrice)&&(identical(other.productImage, productImage) || other.productImage == productImage)&&(identical(other.productSKU, productSKU) || other.productSKU == productSKU)&&(identical(other.productType, productType) || other.productType == productType)&&(identical(other.stockStatus, stockStatus) || other.stockStatus == stockStatus)&&(identical(other.productId, productId) || other.productId == productId)&&const DeepCollectionEquality().equals(other._relatedProducts, _relatedProducts));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,productName,category,productShortDescription,productPrice,productSalePrice,productImage,productSKU,productType,stockStatus,productId);
+int get hashCode => Object.hash(runtimeType,productName,category,productShortDescription,productPrice,productSalePrice,productImage,productSKU,productType,stockStatus,productId,const DeepCollectionEquality().hash(_relatedProducts));
 
 @override
 String toString() {
-  return 'Product(productName: $productName, category: $category, productShortDescription: $productShortDescription, productPrice: $productPrice, productSalePrice: $productSalePrice, productImage: $productImage, productSKU: $productSKU, productType: $productType, stockStatus: $stockStatus, productId: $productId)';
+  return 'Product(productName: $productName, category: $category, productShortDescription: $productShortDescription, productPrice: $productPrice, productSalePrice: $productSalePrice, productImage: $productImage, productSKU: $productSKU, productType: $productType, stockStatus: $stockStatus, productId: $productId, relatedProducts: $relatedProducts)';
 }
 
 
@@ -145,7 +155,7 @@ abstract mixin class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
   factory _$ProductCopyWith(_Product value, $Res Function(_Product) _then) = __$ProductCopyWithImpl;
 @override @useResult
 $Res call({
- String productName, Category category, String productShortDescription, double productPrice, double productSalePrice, String productImage, String productSKU, String productType, String stockStatus, String productId
+ String productName, Category category, String productShortDescription, double productPrice, double productSalePrice, String productImage, String productSKU, String productType, String stockStatus, String productId, List<String>? relatedProducts
 });
 
 
@@ -162,7 +172,7 @@ class __$ProductCopyWithImpl<$Res>
 
 /// Create a copy of Product
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? productName = null,Object? category = null,Object? productShortDescription = null,Object? productPrice = null,Object? productSalePrice = null,Object? productImage = null,Object? productSKU = null,Object? productType = null,Object? stockStatus = null,Object? productId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? productName = null,Object? category = null,Object? productShortDescription = null,Object? productPrice = null,Object? productSalePrice = null,Object? productImage = null,Object? productSKU = null,Object? productType = null,Object? stockStatus = null,Object? productId = null,Object? relatedProducts = freezed,}) {
   return _then(_Product(
 productName: null == productName ? _self.productName : productName // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
@@ -174,7 +184,8 @@ as String,productSKU: null == productSKU ? _self.productSKU : productSKU // igno
 as String,productType: null == productType ? _self.productType : productType // ignore: cast_nullable_to_non_nullable
 as String,stockStatus: null == stockStatus ? _self.stockStatus : stockStatus // ignore: cast_nullable_to_non_nullable
 as String,productId: null == productId ? _self.productId : productId // ignore: cast_nullable_to_non_nullable
-as String,
+as String,relatedProducts: freezed == relatedProducts ? _self._relatedProducts : relatedProducts // ignore: cast_nullable_to_non_nullable
+as List<String>?,
   ));
 }
 

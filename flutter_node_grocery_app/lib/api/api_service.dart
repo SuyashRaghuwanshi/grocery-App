@@ -68,6 +68,9 @@ class APIService {
     debugPrint("Category API Path: ${Config.categoryAPI}");
     var url = Uri.http(Config.apiUrl, Config.categoryAPI, queryString);
 
+    if (productFilterModel.productIds != null) {
+      queryString["productIds"] = productFilterModel.productIds!.join(",");
+    }
     debugPrint("Final API URL: $url");
     var response = await client.get(url, headers: requestHeaders);
     debugPrint("Status Code: ${response.statusCode}");
@@ -149,6 +152,24 @@ class APIService {
       }
     } else {
       debugPrint("Failed to fetch sliders");
+      return null;
+    }
+  }
+
+  Future<Product?> getProductDetails(String productId) async {
+    Map<String, String> requestHeaders = {'Content-Type': 'application/json'};
+    var url = Uri.http(Config.apiUrl, Config.productAPI + "/" + productId);
+    var response = await client.get(url, headers: requestHeaders);
+    if (response.statusCode == 200) {
+      try {
+        var data = jsonDecode(response.body);
+        return Product.fromJson(data);
+      } catch (e) {
+        debugPrint("Error decoding JSON: $e");
+        throw Exception("Failed to parse product details");
+      }
+    } else {
+      debugPrint("Failed to fetch product details");
       return null;
     }
   }

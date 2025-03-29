@@ -7,6 +7,7 @@ import 'package:flutter_node_grocery_app/models/pagination.dart';
 import 'package:flutter_node_grocery_app/models/product.dart';
 import 'package:flutter_node_grocery_app/models/product_filter.dart';
 import 'package:flutter_node_grocery_app/models/slider.dart';
+import 'package:flutter_node_grocery_app/pages/product_details.page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final categoryProvider =
@@ -50,3 +51,20 @@ final sliderProvider = FutureProvider.family<
   final sliderRepo = ref.watch(apiService);
   return sliderRepo.getSliders(paginationModel.page, paginationModel.pageSize);
 });
+
+final ProductDetailsProvider = FutureProvider.family<Product?, String>((
+  ref,
+  productId,
+) {
+  final apiRepository = ref.watch(apiService);
+  return apiRepository.getProductDetails(productId);
+});
+
+final relatedProductsProvider =
+    FutureProvider.family<List<Product>?, ProductFilterModel>((
+      ref,
+      productsFilterModel,
+    ) {
+      final apirepository = ref.watch(apiService);
+      return apirepository.getProducts(productsFilterModel);
+    });

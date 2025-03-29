@@ -92,7 +92,12 @@ class ProductCard extends StatelessWidget {
                 ),
                 GestureDetector(
                   child: Icon(Icons.favorite, color: Colors.grey, size: 20),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      "/product-details",
+                      arguments: {'productId': model!.productId},
+                    );
+                  },
                 ),
               ],
             ),
