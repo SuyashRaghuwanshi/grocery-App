@@ -3,7 +3,10 @@ const productController= require("../controllers/products.controller.js");
 const userController= require("../controllers/users.controller.js");
 const sliderController= require("../controllers/slider.controller.js");
 const relatedProductController= require("../controllers/related_product.controller.js");
+const cartController=require("../controllers/cart.controller.js");
+const {authenticateToken}=require("../middleware/auth.js");
 const express =require("express");
+const { concat } = require("async");
 const router=express.Router();
 
 console.log("✅ Registering Category Routes");
@@ -37,6 +40,8 @@ router.post("/login", userController.login);
 router.post("/relatedProduct", relatedProductController.create);
 router.delete("/relatedProduct/:id", relatedProductController.delete);
 
-
+router.post("/cart",[authenticateToken], cartController.create);
+router.get("/cart",[authenticateToken], cartController.findAll);
+router.delete("/cart",[authenticateToken], cartController.delete);
 console.log("✅ Product route registered");
 module.exports= router;

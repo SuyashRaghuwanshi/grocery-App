@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart' show debugPrint;
+import 'package:flutter/material.dart';
 import 'package:flutter_node_grocery_app/config.dart';
+import 'package:flutter_node_grocery_app/main.dart';
+import 'package:flutter_node_grocery_app/models/cart.dart';
 import "package:flutter_node_grocery_app/models/category.dart";
 import 'package:flutter_node_grocery_app/models/login_response_model.dart';
 import 'package:flutter_node_grocery_app/models/product.dart';
@@ -170,6 +173,85 @@ class APIService {
       }
     } else {
       debugPrint("Failed to fetch product details");
+      return null;
+    }
+  }
+
+  Future<Cart?> getCart() async {
+    var loginDetails = await SharedService.loginDetails();
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ${loginDetails!.data.token.toString()}',
+    };
+    var url = Uri.http(Config.apiUrl, Config.cartAPI);
+
+    var response = await client.get(url, headers: requestHeaders);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      return Cart.fromJson(data["data"]);
+    } else if (response.statusCode == 401) {
+      navigatorKey.currentState?.pushNamedAndRemoveUntil(
+        "/login",
+        (route) => false,
+      );
+    } else {
+      return null;
+    }
+  }
+
+  Future<bool?> addCartItem(productId, qty) async {
+    var loginDetails = await SharedService.loginDetails();
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ${loginDetails!.data.token.toString()}',
+    };
+    var url = Uri.http(Config.apiUrl, Config.cartAPI);
+
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode({
+        "products": [
+          {"product": productId, "qty": qty},
+        ],
+      }),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else if (response.statusCode == 401) {
+      navigatorKey.currentState?.pushNamedAndRemoveUntil(
+        "/login",
+        (route) => false,
+      );
+    } else {
+      return null;
+    }
+  }
+
+  Future<bool?> removeCartItem(productId, qty) async {
+    var loginDetails = await SharedService.loginDetails();
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ${loginDetails!.data.token.toString()}',
+    };
+    var url = Uri.http(Config.apiUrl, Config.cartAPI);
+
+    var response = await client.delete(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode({"productId": productId, "qty": qty}),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else if (response.statusCode == 401) {
+      navigatorKey.currentState?.pushNamedAndRemoveUntil(
+        "/login",
+        (route) => false,
+      );
+    } else {
       return null;
     }
   }

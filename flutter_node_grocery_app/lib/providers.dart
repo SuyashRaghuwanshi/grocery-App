@@ -1,7 +1,9 @@
 import 'package:flutter_node_grocery_app/api/api_service.dart';
+import 'package:flutter_node_grocery_app/application/notifier/cart_notifier.dart';
 import 'package:flutter_node_grocery_app/application/notifier/product_filter_notifier.dart';
 import 'package:flutter_node_grocery_app/application/notifier/products_notifier.dart';
 import 'package:flutter_node_grocery_app/application/product_state.dart';
+import 'package:flutter_node_grocery_app/application/state/cart_state.dart';
 import 'package:flutter_node_grocery_app/models/category.dart';
 import 'package:flutter_node_grocery_app/models/pagination.dart';
 import 'package:flutter_node_grocery_app/models/product.dart';
@@ -68,3 +70,7 @@ final relatedProductsProvider =
       final apirepository = ref.watch(apiService);
       return apirepository.getProducts(productsFilterModel);
     });
+
+final cartItemProvider = StateNotifierProvider<CartNotifier, CartState>(
+  (ref) => CartNotifier(ref.watch(apiService)),
+);

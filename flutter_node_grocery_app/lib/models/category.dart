@@ -45,7 +45,7 @@ abstract class Category with _$Category {
   factory Category({
     required String categoryId,
     required String categoryName,
-    required String categoryImage,
+    required String? categoryImage,
   }) = _Category;
 
   // ✅ Add a private constructor (Fix for Freezed error)

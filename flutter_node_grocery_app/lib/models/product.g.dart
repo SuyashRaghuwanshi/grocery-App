@@ -9,13 +9,13 @@ part of 'product.dart';
 _Product _$ProductFromJson(Map<String, dynamic> json) => _Product(
   productName: json['productName'] as String,
   category: Category.fromJson(json['category'] as Map<String, dynamic>),
-  productShortDescription: json['productShortDescription'] as String,
+  productShortDescription: json['productShortDescription'] as String?,
   productPrice: (json['productPrice'] as num).toDouble(),
   productSalePrice: (json['productSalePrice'] as num).toDouble(),
   productImage: json['productImage'] as String,
-  productSKU: json['productSKU'] as String,
-  productType: json['productType'] as String,
-  stockStatus: json['stockStatus'] as String,
+  productSKU: json['productSKU'] as String?,
+  productType: json['productType'] as String?,
+  stockStatus: json['stockStatus'] as String?,
   productId: json['productId'] as String,
   relatedProducts:
       (json['relatedProducts'] as List<dynamic>?)

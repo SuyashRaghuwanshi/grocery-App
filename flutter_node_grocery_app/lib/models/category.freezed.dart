@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Category {
 
- String get categoryId; String get categoryName; String get categoryImage;
+ String get categoryId; String get categoryName; String? get categoryImage;
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $CategoryCopyWith<$Res>  {
   factory $CategoryCopyWith(Category value, $Res Function(Category) _then) = _$CategoryCopyWithImpl;
 @useResult
 $Res call({
- String categoryId, String categoryName, String categoryImage
+ String categoryId, String categoryName, String? categoryImage
 });
 
 
@@ -66,12 +66,12 @@ class _$CategoryCopyWithImpl<$Res>
 
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? categoryId = null,Object? categoryName = null,Object? categoryImage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? categoryId = null,Object? categoryName = null,Object? categoryImage = freezed,}) {
   return _then(_self.copyWith(
 categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
 as String,categoryName: null == categoryName ? _self.categoryName : categoryName // ignore: cast_nullable_to_non_nullable
-as String,categoryImage: null == categoryImage ? _self.categoryImage : categoryImage // ignore: cast_nullable_to_non_nullable
-as String,
+as String,categoryImage: freezed == categoryImage ? _self.categoryImage : categoryImage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -87,7 +87,7 @@ class _Category extends Category {
 
 @override final  String categoryId;
 @override final  String categoryName;
-@override final  String categoryImage;
+@override final  String? categoryImage;
 
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
@@ -122,7 +122,7 @@ abstract mixin class _$CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res>
   factory _$CategoryCopyWith(_Category value, $Res Function(_Category) _then) = __$CategoryCopyWithImpl;
 @override @useResult
 $Res call({
- String categoryId, String categoryName, String categoryImage
+ String categoryId, String categoryName, String? categoryImage
 });
 
 
@@ -139,12 +139,12 @@ class __$CategoryCopyWithImpl<$Res>
 
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? categoryId = null,Object? categoryName = null,Object? categoryImage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? categoryId = null,Object? categoryName = null,Object? categoryImage = freezed,}) {
   return _then(_Category(
 categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
 as String,categoryName: null == categoryName ? _self.categoryName : categoryName // ignore: cast_nullable_to_non_nullable
-as String,categoryImage: null == categoryImage ? _self.categoryImage : categoryImage // ignore: cast_nullable_to_non_nullable
-as String,
+as String,categoryImage: freezed == categoryImage ? _self.categoryImage : categoryImage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

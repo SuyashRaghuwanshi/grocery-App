@@ -2,13 +2,22 @@ const jwt=require('jsonwebtoken');
 
 const TOKEN_KEY="RANDOM_KEY";
 
-function authentificationToken(req,res,next){
+function authenticateToken(req,res,next){
     const authHeader=req.headers['authorization'];
     const token=authHeader && authHeader.split(' ')[1];
-    if(token==null) return res.sendStatus(401);
+    // if(token==null) return res.sendStatus(401);
+    if(!token){
+        return res.status(403).send(
+            {
+                message:"No Token Provided!"
+            }
+        );
+    }
     jwt.verify(token,TOKEN_KEY,(err,user)=>{
-        if(err) return res.sendStatus(403);
-        req.user=user;
+        if(err) return res.status(401).send({
+            message:"unauthorized!"
+        });
+        req.user=user.data;
         next();
     }
     );
@@ -21,6 +30,6 @@ function generateAccessToken(userModel){
 }
 
 module.exports={
-    authentificationToken,
+    authenticateToken,
     generateAccessToken
 }

@@ -47,7 +47,7 @@ class _CustomStepperState extends State<CustomStepper> {
                       widget.value == widget.lowerLimit
                           ? widget.lowerLimit
                           : widget.value -= widget.stepValue;
-                  widget.onChanged(widget.value);
+                  widget.onChanged({"qty": widget.value, "type": "-"});
                 }),
           ),
           SizedBox(
@@ -72,7 +72,7 @@ class _CustomStepperState extends State<CustomStepper> {
                       widget.value == widget.upperLimit
                           ? widget.upperLimit
                           : widget.value += widget.stepValue;
-                  widget.onChanged(widget.value);
+                  widget.onChanged({"qty": widget.value, "type": "+"});
                 }),
           ),
         ],
